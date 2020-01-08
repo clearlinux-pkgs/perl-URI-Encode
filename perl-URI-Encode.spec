@@ -4,13 +4,14 @@
 #
 Name     : perl-URI-Encode
 Version  : 1.1.1
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/M/MI/MITHUN/URI-Encode-v1.1.1.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MI/MITHUN/URI-Encode-v1.1.1.tar.gz
 Summary  : 'Simple percent Encoding/Decoding'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-URI-Encode-license = %{version}-%{release}
+Requires: perl-URI-Encode-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -22,6 +23,7 @@ URI::Encode - Simple percent Encoding/Decoding
 Summary: dev components for the perl-URI-Encode package.
 Group: Development
 Provides: perl-URI-Encode-devel = %{version}-%{release}
+Requires: perl-URI-Encode = %{version}-%{release}
 
 %description dev
 dev components for the perl-URI-Encode package.
@@ -35,14 +37,24 @@ Group: Default
 license components for the perl-URI-Encode package.
 
 
+%package perl
+Summary: perl components for the perl-URI-Encode package.
+Group: Default
+Requires: perl-URI-Encode = %{version}-%{release}
+
+%description perl
+perl components for the perl-URI-Encode package.
+
+
 %prep
 %setup -q -n URI-Encode-v1.1.1
+cd %{_builddir}/URI-Encode-v1.1.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -52,7 +64,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -61,7 +73,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-URI-Encode
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-URI-Encode/LICENSE
+cp %{_builddir}/URI-Encode-v1.1.1/LICENSE %{buildroot}/usr/share/package-licenses/perl-URI-Encode/7f251de5f12cbc7c38cfb014ef0a4fd2fcbb2d37
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -74,7 +86,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/URI/Encode.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -82,4 +93,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-URI-Encode/LICENSE
+/usr/share/package-licenses/perl-URI-Encode/7f251de5f12cbc7c38cfb014ef0a4fd2fcbb2d37
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/URI/Encode.pm
