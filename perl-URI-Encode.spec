@@ -4,7 +4,7 @@
 #
 Name     : perl-URI-Encode
 Version  : 1.1.1
-Release  : 21
+Release  : 22
 URL      : https://cpan.metacpan.org/authors/id/M/MI/MITHUN/URI-Encode-v1.1.1.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MI/MITHUN/URI-Encode-v1.1.1.tar.gz
 Summary  : 'Simple percent Encoding/Decoding'
@@ -97,4 +97,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/URI/Encode.pm
+/usr/lib/perl5/*
