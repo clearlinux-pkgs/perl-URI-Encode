@@ -7,7 +7,7 @@
 #
 Name     : perl-URI-Encode
 Version  : 1.1.1
-Release  : 28
+Release  : 29
 URL      : https://cpan.metacpan.org/authors/id/M/MI/MITHUN/URI-Encode-v1.1.1.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MI/MITHUN/URI-Encode-v1.1.1.tar.gz
 Summary  : 'Simple percent Encoding/Decoding'
